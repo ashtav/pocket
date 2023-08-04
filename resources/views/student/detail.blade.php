@@ -315,7 +315,7 @@
                                         <tbody>
                                             @foreach ($datas as $data)
                                                 <tr>
-                                                    <td>{{ $data->date }}</td>
+                                                    <td>{{ $data->created_at }}</td>
                                                     <td>{{ $data->student->nis }}</td>
                                                     <td>{{ $data->student->name }}</td>
                                                     <td>Rp {{ number_format($data->amount, 2) }}</td>
@@ -388,7 +388,7 @@
                                         <tbody>
                                             @foreach ($saving as $data)
                                                 <tr>
-                                                    <td>{{ $data->date }}</td>
+                                                    <td>{{ $data->created_at }}</td>
                                                     <td>{{ $data->student->nis }}</td>
                                                     <td>{{ $data->student->name }}</td>
                                                     <td>Rp {{ number_format($data->amount, 2) }}</td>
@@ -396,7 +396,8 @@
                                                     <td>
                                                         <div class="margin">
                                                             <div class="btn-group">
-                                                                <form action="{{ route('savings.destroy', $data->id) }}"
+                                                                <form
+                                                                    action="{{ route('savings.destroy', $data->id) }}"
                                                                     method="POST">
                                                                     <a href="{{ route('savings.edit', $data->id) }}"
                                                                         class="btn-sm btn-warning"><i
@@ -406,10 +407,9 @@
                                                                     <button type="submit"
                                                                         style="border: none; padding: 0.3em 0.6em"
                                                                         class="btn-sm btn-danger"
-                                                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
-                                                                        ><i
+                                                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i
                                                                             class="fas fa-trash"></i></button>
-                                                                    </form>
+                                                                </form>
                                                             </div>
                                                         </div>
 
@@ -495,15 +495,23 @@
         $(function() {
             $("#example1").DataTable({
                 "responsive": true,
-                "lengthChange": false,
+                "lengthChange": true,
                 "autoWidth": false,
+                "aLengthMenu": [
+                    [15, 50, 100, 200, -1],
+                    [15, 50, 100, 200, "All"]
+                ],
                 "buttons": ["csv", "excel", "pdf"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
             $("#example2").DataTable({
                 "responsive": true,
-                "lengthChange": false,
+                "lengthChange": true,
                 "autoWidth": false,
+                "aLengthMenu": [
+                    [15, 50, 100, 200, -1],
+                    [15, 50, 100, 200, "All"]
+                ],
                 "buttons": ["csv", "excel", "pdf"]
             }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
         });

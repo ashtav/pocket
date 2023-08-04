@@ -218,7 +218,7 @@
                                         <tbody>
                                             @foreach ($datas as $data)
                                                 <tr>
-                                                    <td>{{ $data->date }}</td>
+                                                    <td>{{ $data->created_at }}</td>
                                                     <td>{{ $data->student->nis }}</td>
                                                     <td>{{ $data->student->name }}</td>
                                                     <td>Rp {{ number_format($data->amount, 2) }}</td>

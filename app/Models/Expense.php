@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Expense extends Model
 {
@@ -20,5 +21,13 @@ class Expense extends Model
     public function student()
     {
         return $this->belongsTo(Student::class);
+    }
+
+    protected $dates = ['created_at', 'updated_at'];
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value, 'UTC')
+            ->timezone('Asia/Singapore');
     }
 }
