@@ -210,36 +210,23 @@
                                                 <th>Tanggal</th>
                                                 <th>NIS</th>
                                                 <th>Nama</th>
-                                                <th>Nominal</th>
-                                                <th>Keterangan</th>
+                                                <th>Total</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($datas as $data)
                                                 <tr>
-                                                    <td>{{ $data->created_at }}</td>
-                                                    <td>{{ $data->student->nis }}</td>
-                                                    <td>{{ $data->student->name }}</td>
-                                                    <td>Rp {{ number_format($data->amount, 2) }}</td>
-                                                    <td>{{ $data->note }}</td>
+                                                    <td>{{ $data->last_saving_date }}</td>
+                                                    <td>{{ $data->nis }}</td>
+                                                    <td>{{ $data->name }}</td>
+                                                    <td>Rp {{ number_format($data->total_savings, 2) }}</td>
                                                     <td>
                                                         <div class="margin">
                                                             <div class="btn-group">
-                                                                <form action="{{ route('savings.destroy', $data->id) }}"
-                                                                    method="POST">
-                                                                    <a href="{{ route('savings.edit', $data->id) }}"
-                                                                        class="btn-sm btn-warning"><i
-                                                                            class="fas fa-edit"></i></a>
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <button type="submit"
-                                                                        style="border: none; padding: 0.3em 0.6em"
-                                                                        class="btn-sm btn-danger"
-                                                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
-                                                                        ><i
-                                                                            class="fas fa-trash"></i></button>
-                                                                    </form>
+                                                                <a href="{{ route('students.show', $data->id) }}"
+                                                                    class="btn-sm btn-primary"><i
+                                                                        class="fas fa-search mr-2"></i> Detail</a>
                                                             </div>
                                                         </div>
 
@@ -320,14 +307,16 @@
             $("#example1").DataTable({
                 "responsive": true,
                 "lengthChange": false,
+                "ordering": true,
                 "autoWidth": false,
                 "buttons": ["csv", "excel", "pdf"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
-                "ordering": true,
+                "ordering": false,
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,

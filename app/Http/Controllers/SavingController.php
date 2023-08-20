@@ -10,22 +10,21 @@ use Illuminate\Http\Request;
 
 class SavingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $datas = Saving::all();
+        $datas = Student::select('students.*')
+            ->join('savings', 'students.id', '=', 'savings.student_id')
+            ->selectRaw('SUM(savings.amount) as total_savings')
+            ->selectRaw('MAX(savings.created_at) as last_saving_date')  // Menampilkan tanggal terakhir/terbaru
+            ->groupBy('students.id')
+            ->get();
+
+        $datas = $datas->sortByDesc('last_saving_date')->values();
+
         return view('saving.index', compact('datas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $students = Student::all();
