@@ -217,7 +217,7 @@
                                 <div class="inner">
                                     <h3>{{ $data['total_student'] }}</h3>
 
-                                    <p>Siswa</p>
+                                    <p>Total Siswa</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person"></i>
@@ -229,17 +229,33 @@
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-danger">
+                            <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>{{ number_format($data['total_saving'], 0) }}</h3>
+                                    <h3>Rp {{ number_format($data['total_saving'], 0) }}</h3>
 
-                                    <p>Pendapatan</p>
+                                    <p>Total Pendapatan</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
                                 <a href="{{ route('savings.index') }}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>Rp {{ number_format($data['total_expense'], 0) }}</h3>
+
+                                    <p>Total Pengeluaran</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer" style="pointer-events: none"><i
+                                        class="fas fa-arrow-circle-right" style="opacity: 0"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
