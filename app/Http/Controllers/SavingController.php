@@ -7,23 +7,50 @@ use App\Http\Requests\UpdateSavingRequest;
 use App\Models\Saving;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SavingController extends Controller
 {
 
     public function index()
     {
-        $datas = Student::select('students.*')
-            ->join('savings', 'students.id', '=', 'savings.student_id')
-            ->selectRaw('SUM(savings.amount) as total_savings')
-            ->selectRaw('MAX(savings.created_at) as last_saving_date')  // Menampilkan tanggal terakhir/terbaru
-            ->groupBy('students.id')
+        $datas = Student::select('students.id', 'students.name', 'students.nis')
+            ->addSelect([
+                'total_savings' => DB::table('savings')
+                    ->selectRaw('SUM(amount)')
+                    ->whereColumn('students.id', 'savings.student_id')
+                    ->groupBy('savings.student_id'),
+                'total_expenses' => DB::table('expenses')
+                    ->selectRaw('SUM(amount)')
+                    ->whereColumn('students.id', 'expenses.student_id')
+                    ->groupBy('expenses.student_id'),
+                'last_saving_date' => DB::table('savings')
+                    ->selectRaw('MAX(created_at)')
+                    ->whereColumn('students.id', 'savings.student_id')
+                    ->groupBy('savings.student_id'),
+            ])
+            ->withCasts([
+                'total_savings' => 'integer',
+                'total_expenses' => 'integer',
+                'last_saving_date' => 'datetime'
+            ])
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('savings')
+                    ->whereColumn('students.id', 'savings.student_id');
+            })
             ->get();
+
+        // Add 'total' field to each data point
+        foreach ($datas as $data) {
+            $data->total = $data->total_savings + $data->total_expenses;
+        }
 
         $datas = $datas->sortByDesc('last_saving_date')->values();
 
         return view('saving.index', compact('datas'));
     }
+
 
     public function create()
     {

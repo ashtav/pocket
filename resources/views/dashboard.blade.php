@@ -215,7 +215,7 @@
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>{{ App\Models\Student::count() }}</h3>
+                                    <h3>{{ $data['total_student'] }}</h3>
 
                                     <p>Siswa</p>
                                 </div>
@@ -231,7 +231,7 @@
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3>{{ number_format(App\Models\Saving::sum('amount'), 0) }}</h3>
+                                    <h3>{{ number_format($data['total_saving'], 0) }}</h3>
 
                                     <p>Pendapatan</p>
                                 </div>

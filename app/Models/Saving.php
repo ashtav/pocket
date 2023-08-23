@@ -14,7 +14,7 @@ class Saving extends Model
     protected $fillable = [
         'student_id',
         'date',
-        'amount',
+        'amount', 
         'note',
     ];
 

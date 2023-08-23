@@ -220,7 +220,7 @@
                                                     <td>{{ $data->last_saving_date }}</td>
                                                     <td>{{ $data->nis }}</td>
                                                     <td>{{ $data->name }}</td>
-                                                    <td>Rp {{ number_format($data->total_savings, 2) }}</td>
+                                                    <td>Rp {{ number_format($data->total, 2) }}</td>
                                                     <td>
                                                         <div class="margin">
                                                             <div class="btn-group">
