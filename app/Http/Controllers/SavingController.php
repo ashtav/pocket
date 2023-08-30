@@ -43,7 +43,7 @@ class SavingController extends Controller
 
         // Add 'total' field to each data point
         foreach ($datas as $data) {
-            $data->total = $data->total_savings + $data->total_expenses;
+            $data->total = $data->total_savings - $data->total_expenses;
         }
 
         $datas = $datas->sortByDesc('last_saving_date')->values();

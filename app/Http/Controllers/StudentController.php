@@ -66,7 +66,7 @@ class StudentController extends Controller
         $totalExpense = Expense::where('student_id', $id)->sum('amount');
         $totalSaving = Saving::where('student_id', $id)->sum('amount');
 
-        $saving = Saving::where('student_id', $id)->get();
+        $saving = Saving::where('student_id', $id)->get(); 
 
         return view('student.detail', compact('student', 'datas', 'balance', 'totalSavingInDay', 'totalSavingInMonth', 'totalExpense', 'totalSaving', 'saving'));
     }

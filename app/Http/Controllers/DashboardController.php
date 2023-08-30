@@ -26,7 +26,7 @@ class DashboardController extends Controller
 
         $data = [
             'total_student' => $total_student,
-            'total_saving' => $total_saving + $total_expense,
+            'total_saving' => $total_saving - $total_expense,
             'total_expense' => $total_expense,
         ];
         
