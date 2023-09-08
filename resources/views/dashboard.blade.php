@@ -233,7 +233,7 @@
                                 <div class="inner">
                                     <h3>Rp {{ number_format($data['total_saving'], 0) }}</h3>
 
-                                    <p>Total Pendapatan</p>
+                                    <p>Total Keseluruhan</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
@@ -243,7 +243,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-3 col-6 d-none">
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
