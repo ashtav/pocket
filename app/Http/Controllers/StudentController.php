@@ -66,7 +66,7 @@ class StudentController extends Controller
         $totalExpense = Expense::where('student_id', $id)->sum('amount');
         $totalSaving = Saving::where('student_id', $id)->sum('amount');
 
-        $saving = Saving::where('student_id', $id)->get(); 
+        $saving = Saving::where('student_id', $id)->get();
 
         return view('student.detail', compact('student', 'datas', 'balance', 'totalSavingInDay', 'totalSavingInMonth', 'totalExpense', 'totalSaving', 'saving'));
     }
@@ -104,7 +104,21 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        Student::find($id)->delete();
-        return redirect()->route('students.index')->with('success', 'Data berhasil dihapus!');
+        $student = Student::find($id);
+
+        if ($student) {
+            // Hapus semua baris di tabel expenses yang terkait dengan student_id
+            $student->expense()->delete();
+
+            // Hapus semua baris di tabel savings yang terkait dengan student_id
+            $student->savings()->delete();
+
+            // Setelah menghapus data terkait, hapus data siswa
+            $student->delete();
+
+            return redirect()->route('students.index')->with('success', 'Data berhasil dihapus!');
+        }
+
+        return redirect()->route('students.index')->with('error', 'Data tidak ditemukan!');
     }
 }

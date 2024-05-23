@@ -14,7 +14,7 @@ class SavingController extends Controller
 
     public function index()
     {
-        $datas = Student::select('students.id', 'students.name', 'students.nis')
+        $datas = Student::select('students.id', 'students.name', 'students.nis', 'students.class')
             ->addSelect([
                 'total_savings' => DB::table('savings')
                     ->selectRaw('SUM(amount)')

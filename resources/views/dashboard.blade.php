@@ -243,7 +243,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-6 d-none">
+                        <div class="col-lg-3 col-6 d-no ne">
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">

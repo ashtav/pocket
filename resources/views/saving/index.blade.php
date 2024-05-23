@@ -209,6 +209,7 @@
                                             <tr>
                                                 <th>Tanggal</th>
                                                 <th>NIS</th>
+                                                <th>Kelas</th>
                                                 <th>Nama</th>
                                                 <th>Total</th>
                                                 <th>Action</th>
@@ -219,6 +220,7 @@
                                                 <tr>
                                                     <td>{{ $data->last_saving_date }}</td>
                                                     <td>{{ $data->nis }}</td>
+                                                    <td>{{ $data->class }}</td>
                                                     <td>{{ $data->name }}</td>
                                                     <td>Rp {{ number_format($data->total, 2) }}</td>
                                                     <td>
